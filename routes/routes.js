@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Post = require("../models/posts");
 const multer = require("multer");
+const posts = require("../models/posts");
 
 // image upload
 var storage = multer.diskStorage({
@@ -30,15 +31,26 @@ router.post("/add", upload, (req, res) => {
     } else {
       req.session.message = {
         type: "success",
-        message: "User added successfully! ",
+        message: "Post added successfully! ",
       };
       res.redirect("/");
     }
   });
 });
 
+//Get all posts route
+
 router.get("/", (req, res) => {
-  res.render("index", { title: "Home Page" });
+  Post.find().exec((err, posts) => {
+    if (err) {
+      res.json({ message: err.message });
+    } else {
+      res.render("index", {
+        title: "Home Page",
+        posts: posts,
+      });
+    }
+  });
 });
 
 router.get("/add", (req, res) => {
