@@ -1,14 +1,10 @@
 const mongoose = require("mongoose");
-const userSchema = new mongoose.Schema({
-  name: {
+const PostSchema = new mongoose.Schema({
+  PostTopic: {
     type: String,
     required: true,
   },
-  email: {
-    type: String,
-    required: true,
-  },
-  phone: {
+  Postdescription: {
     type: String,
     required: true,
   },
@@ -23,4 +19,4 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model("User", userSchema);
+module.exports = mongoose.model("Post", PostSchema);
