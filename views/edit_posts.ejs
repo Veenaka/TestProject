@@ -11,11 +11,11 @@
                    <form action="/update/<%= post._id %>" method="post" id="add-form" enctype="multipart/form-data">
                        <div class="mb-3">
                            <label for="PostTopic">Post Topic</label>
-                           <input type="text" name="PostTopic" class="form-control form-control-lg" placeholder="Enter Post Topic" value="<%= post.PostTopic %>" required />
+                           <input type="text" name="PostTopic" class="form-control form-control-lg" placeholder="Enter Post Topic" value="<%= post.PostTopic %>" />
                        </div>
                        <div class="mb-3">
                         <label for="Postdescription">Post Description</label>
-                        <input type="text" name="Postdescription" class="form-control form-control-lg" placeholder="Enter Post Description" value="<%= post.Postdescription %>" required />
+                        <input type="text" name="Postdescription" class="form-control form-control-lg" placeholder="Enter Post Description" value="<%= post.Postdescription %>" />
                     </div>                    
                     <div class="mb-3">
                         <label for="image" class="form-label">Select Image</label>

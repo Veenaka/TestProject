@@ -4,6 +4,7 @@ const Post = require("../models/posts");
 const multer = require("multer");
 const posts = require("../models/posts");
 const fs = require("fs");
+const { findByIdAndRemove } = require("../models/posts");
 
 // image upload
 var storage = multer.diskStorage({
@@ -112,6 +113,29 @@ router.post("/update/:id", upload, (req, res) => {
       }
     }
   );
+});
+
+//delete post route
+router.get("/delete/:id", (req, res) => {
+  let id = req.params.id;
+  Post.findByIdAndRemove(id, (err, result) => {
+    if (result.image != "") {
+      try {
+        fs.unlinkSync("./uploads/" + result.image);
+      } catch (err) {
+        console.log(err);
+      }
+    }
+    if (err) {
+      res.json({ message: err.message });
+    } else {
+      req.session.message = {
+        type: "info",
+        message: "Post deleted successfully",
+      };
+      res.redirect("/");
+    }
+  });
 });
 
 module.exports = router;
